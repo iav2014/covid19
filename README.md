@@ -14,13 +14,17 @@ Image are taken from
 
 https://github.com/ieee8023/covid-chestxray-dataset
 
+You can test & train with other covid19 dataset, like
+
+https://github.com/UCSD-AI4H/COVID-CT
+
 
 Thanks to pyimagesearch for teaching keras+tensorflow, and image processing
 using open computer vision (cv)
 
 Disclaimer
 ----------
-This work is for didactic purposes and should not be used for real diagnosis
+This work is for didactic purposes (train & classify neural network) and should not be used for real diagnosis
 
 
 Requirements
