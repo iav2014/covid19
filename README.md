@@ -18,6 +18,8 @@ You can test & train with other covid19 dataset, like
 
 https://github.com/UCSD-AI4H/COVID-CT
 
+https://www.kaggle.com/tawsifurrahman/covid19-radiography-database/data
+
 
 Thanks to pyimagesearch for teaching keras+tensorflow, and image processing
 using open computer vision (cv)
