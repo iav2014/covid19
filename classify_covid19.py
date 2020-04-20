@@ -1,3 +1,5 @@
+# GOAL
+# classify input image, using neural network saved to file
 # USAGE
 # python classify_covid19.py --model model/vggnet.model --labelbin labels/labels --image test/[malignant|benign]/*.png
 

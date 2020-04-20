@@ -10,6 +10,21 @@ VGG16 code architecture: https://www.pyimagesearch.com/
 Diagnosis system based on neural networks, for detection of covid19 based
 on radiographs.
 
+COVID19Net: 
+
+shells:
+
+	pooling2D
+
+	Flatten
+
+	Dense -> relu
+
+	Dropout
+
+	Dense -> softmax
+
+
 Image are taken from
 
 https://github.com/ieee8023/covid-chestxray-dataset

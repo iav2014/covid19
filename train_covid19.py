@@ -1,21 +1,19 @@
+# GOAL
+# create covid19 neural network & train it with image dataset
+# save model to file
 # USAGE
 # python train_covid19.py --dataset dataset
 
 # import the necessary packages
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.layers import AveragePooling2D
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import Flatten
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Input
-from tensorflow.keras.models import Model
+
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from covid19net.vggnet import COVID19Net
 from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np
@@ -84,30 +82,8 @@ trainAug = ImageDataGenerator(
 	rotation_range=15,
 	fill_mode="nearest")
 
-# load the VGG16 network, ensuring the head FC layer sets are left
-# off
-baseModel = VGG16(weights="imagenet", include_top=False,
-	input_tensor=Input(shape=(224, 224, 3)))
-
-# construct the head of the model that will be placed on top of the
-# the base model
-headModel = baseModel.output
-headModel = AveragePooling2D(pool_size=(4, 4))(headModel)
-headModel = Flatten(name="flatten")(headModel)
-headModel = Dense(64, activation="relu")(headModel)
-headModel = Dropout(0.5)(headModel)
-headModel = Dense(2, activation="softmax")(headModel)
-
-# place the head FC model on top of the base model (this will become
-# the actual model we will train)
-model = Model(inputs=baseModel.input, outputs=headModel)
-
-# loop over all layers in the base model and freeze them so they will
-# *not* be updated during the first training process
-for layer in baseModel.layers:
-	layer.trainable = False
-
-# compile our model
+model=COVID19Net.build()
+# compile  model
 print("[INFO] compiling model...")
 opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 model.compile(loss="binary_crossentropy", optimizer=opt,
