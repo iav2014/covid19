@@ -58,8 +58,9 @@ https://opencv.org/
 
 Train: generate model
 ---------------------
-Estimated time: 7 min
-macbookpro 2017, 15" 16Gb i7 ssd
+Estimated time: 160s with macbookpro 2017, 15" 16Gb i7 ssd
+
+With GPU: 107s.
 
 ::
 
@@ -78,6 +79,44 @@ See dataset/covid(+) & normal (-)
     $ python3 classify_covid19.py --model model/covid19.model  --labelbin labels/labels --image test/normal/IM-0033-0001-0001.jpeg
 
 
+
+Training using Macbook pro GPU Radeon pro 560
+---------------------------------------------
+
+Read this first: https://towardsdatascience.com/gpu-accelerated-machine-learning-on-macos-48d53ef1b545
+
+::
+
+    $ pip install pyopencl
+
+::
+
+    $ pip install plaidml-keras
+
+::
+
+    $ plaidml-setup
+
+::
+
+    $ python3 trainGPU.py --dataset dataset --model model/covid19GPU.model --labelbin labels/covid19.labels --plot plot/plot-covid19.png
+
+
+Test & classify
+---------------
+See dataset/covid(+) & normal (-)
+
+::
+
+    $ python3 classify_gpu_covid19.py --model model/covid19GPU.model  --labelbin labels/covid19.labels --image test/covid19/1-s2.0-S0140673620303706-fx1_lrg.jpg
+
+::
+
+    $ python3 classify_gpu_covid19.py --model model/covid19GPU.model  --labelbin labels/labels --image test/normal/IM-0033-0001-0001.jpeg
+
+
+
+Install 
 License
 -------
 MIT license
