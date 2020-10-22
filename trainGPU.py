@@ -8,7 +8,9 @@
 
 import os
 import time
-
+import plaidml.keras
+import os
+plaidml.keras.install_backend()
 os.environ["KERAS_BACKEND"] = "plaidml.keras.backend"
 
 from keras.preprocessing.image import ImageDataGenerator
